@@ -3,6 +3,7 @@ const form = document.getElementById("contact-form");
 form.addEventListener("submit", function (e) {
   e.preventDefault();
 
+  let isValid = true;
   const firstname = document.getElementById("name");
   const lastname = document.getElementById("subject");
   const email = document.getElementById("email");
@@ -10,23 +11,65 @@ form.addEventListener("submit", function (e) {
   const radios = document.getElementsByName("query-type");
   const checkbox = document.querySelector('input[type="checkbox"]');
 
-  let isValid = true;
+  const nameError = firstname.nextElementSibling;
+  const lastnameError = lastname.nextElementSibling;
+  const emailError = email.nextElementSibling;
+  const messageError = message.nextElementSibling;
+
+  const successMessage = document.getElementById("success-message");
 
   if (firstname.value.trim() === "") {
-    alert("Please enter your first name.");
+    nameError.textContent = "This field is required.";
+    nameError.style.display = "block";
+    firstname.classList.add("error");
+    setTimeout(() => {
+      nameError.style.display = "none";
+      firstname.classList.remove("error");
+    }, 2000);
     isValid = false;
+  } else {
+    nameError.style.display = "none";
+    firstname.classList.remove("error");
   }
+
   if (lastname.value.trim() === "") {
-    alert("Please enter your last name.");
+    lastnameError.textContent = "This field is required.";
+    lastnameError.style.display = "block";
+    lastname.classList.add("error");
+    setTimeout(() => {
+      lastnameError.style.display = "none";
+      lastname.classList.remove("error");
+    }, 2000);
     isValid = false;
+  } else {
+    lastnameError.style.display = "none";
+    lastname.classList.remove("error");
   }
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
-    alert("Please enter a valid email address.");
+    emailError.textContent = "Please enter a valid email address.";
+    emailError.style.display = "block";
+    email.classList.add("error");
+    setTimeout(() => {
+      emailError.style.display = "none";
+      email.classList.remove("error");
+    }, 2000);
     isValid = false;
+  } else {
+    emailError.style.display = "none";
+    email.classList.remove("error");
   }
   if (message.value.trim() === "") {
-    alert("Please enter your message.");
+    messageError.textContent = "This field is required.";
+    messageError.style.display = "block";
+    message.classList.add("error");
+    setTimeout(() => {
+      messageError.style.display = "none";
+      message.classList.remove("error");
+    }, 2000);
     isValid = false;
+  } else {
+    messageError.style.display = "none";
+    message.classList.remove("error");
   }
   let radioChecked = false;
   radios.forEach((r) => {
@@ -43,8 +86,12 @@ form.addEventListener("submit", function (e) {
     isValid = false;
   }
   if (isValid) {
-    alert("Form submitted successfully!");
+    successMessage.style.display = "block";
+
+    setTimeout(() => {
+      successMessage.style.display = "none";
+    }, 2000);
+
     form.reset();
   }
 });
-console.log(typeof firstname.value);

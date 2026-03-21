@@ -24,6 +24,7 @@ form {
   margin-bottom: 15px;
   display: flex;
   flex-direction: column;
+  cursor: pointer;
 }
 h1 {
   margin-bottom: 20px;
@@ -102,4 +103,37 @@ footer {
 form h1 {
   font-size: 22px;
   margin-bottom: 20px;
+}
+.error-message {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+  display: none;
+}
+input:hover,
+textarea:hover {
+  border-color: #2a7f6f;
+}
+.radio-row label:hover {
+  border-color: #2a7f6f;
+}
+button:hover {
+  background-color: #24665b;
+}
+#success-message {
+  background-color: #2a7f6f;
+  color: white;
+  display: none;
+  padding: 15px 25px;
+  border-radius: 8px;
+
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+.error {
+  border: 1px solid red !important;
 }
