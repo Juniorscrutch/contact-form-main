@@ -43,6 +43,9 @@ label {
   padding: 10px;
   border-radius: 5px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 .row .form-group {
   flex: 1;
@@ -134,6 +137,20 @@ button:hover {
   transition: all 0.3s ease;
   z-index: 1000;
 }
-.error {
-  border: 1px solid red !important;
+input.error,
+textarea.error {
+  border: 1px solid red;
+}
+#checkbox-error {
+  color: red;
+  font-size: 12px;
+  margin-top: 4px;
+}
+.form-group.error {
+  border: none;
+}
+@media (max-width: 600px) {
+  .row {
+    flex-direction: column;
+  }
 }

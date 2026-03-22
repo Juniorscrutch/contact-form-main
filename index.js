@@ -8,8 +8,9 @@ form.addEventListener("submit", function (e) {
   const lastname = document.getElementById("subject");
   const email = document.getElementById("email");
   const message = document.getElementById("message");
-  const radios = document.getElementsByName("query-type");
+  const radios = document.querySelectorAll('input[name = "query-type"]');
   const checkbox = document.querySelector('input[type="checkbox"]');
+  const queryGroup = document.getElementById("query-group");
 
   const nameError = firstname.nextElementSibling;
   const lastnameError = lastname.nextElementSibling;
@@ -17,15 +18,13 @@ form.addEventListener("submit", function (e) {
   const messageError = message.nextElementSibling;
 
   const successMessage = document.getElementById("success-message");
+  const radioError = document.getElementById("radio-error");
+  const checkboxError = document.getElementById("checkbox-error");
 
   if (firstname.value.trim() === "") {
     nameError.textContent = "This field is required.";
     nameError.style.display = "block";
     firstname.classList.add("error");
-    setTimeout(() => {
-      nameError.style.display = "none";
-      firstname.classList.remove("error");
-    }, 2000);
     isValid = false;
   } else {
     nameError.style.display = "none";
@@ -36,10 +35,6 @@ form.addEventListener("submit", function (e) {
     lastnameError.textContent = "This field is required.";
     lastnameError.style.display = "block";
     lastname.classList.add("error");
-    setTimeout(() => {
-      lastnameError.style.display = "none";
-      lastname.classList.remove("error");
-    }, 2000);
     isValid = false;
   } else {
     lastnameError.style.display = "none";
@@ -49,23 +44,16 @@ form.addEventListener("submit", function (e) {
     emailError.textContent = "Please enter a valid email address.";
     emailError.style.display = "block";
     email.classList.add("error");
-    setTimeout(() => {
-      emailError.style.display = "none";
-      email.classList.remove("error");
-    }, 2000);
     isValid = false;
   } else {
     emailError.style.display = "none";
     email.classList.remove("error");
   }
+
   if (message.value.trim() === "") {
     messageError.textContent = "This field is required.";
     messageError.style.display = "block";
     message.classList.add("error");
-    setTimeout(() => {
-      messageError.style.display = "none";
-      message.classList.remove("error");
-    }, 2000);
     isValid = false;
   } else {
     messageError.style.display = "none";
@@ -78,19 +66,30 @@ form.addEventListener("submit", function (e) {
     }
   });
   if (!radioChecked) {
-    alert("Please select a query type.");
+    radioError.textContent = "Please select a query type ";
+    radioError.style.display = "block";
+    queryGroup.classList.add("error");
     isValid = false;
+  } else {
+    radioError.style.display = "none";
+    queryGroup.classList.remove("error");
   }
   if (!checkbox.checked) {
-    alert("consent required.");
+    checkboxError.textContent =
+      "To submit this form, please consent being contacted";
+    checkboxError.style.display = "block";
+    checkbox.closest(".form-group").classList.add("error");
     isValid = false;
+  } else {
+    checkboxError.style.display = "none";
+    checkbox.closest(".form-group").classList.remove("error");
   }
   if (isValid) {
     successMessage.style.display = "block";
 
     setTimeout(() => {
       successMessage.style.display = "none";
-    }, 2000);
+    }, 4000);
 
     form.reset();
   }
