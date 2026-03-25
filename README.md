@@ -35,4 +35,4 @@ I used ChatGPT during this project.
 ## Author
 
 - GitHub: https://github.com/Juniorscrutch
-- Frontend Mentor: https://www.frontendmentor.io/profile/yourusername
+- Frontend Mentor: https://www.frontendmentor.io/
